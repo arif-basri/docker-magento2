@@ -16,7 +16,7 @@ build:
     - docker exec fv_web_1 install-magento
     - docker exec fv_web_1 install-sampledata
     - docker exec fv_web_1 mkdir -p /app/testresults
-    - docker exec fv_web_1 /var/www/html/vendor/bin/phpunit --log-junit /app/testresults/junit.xml -c /var/www/html/dev/tests/unit/phpunit.xml.dist
+    - docker exec fv_web_1 /var/www/html/vendor/bin/phpunit --log-junit /app/testresults/junit.xml -c /var/www/html/dev/tests/unit/phpunit.xml.dist /var/www/html/app/code/Magento/CatalogRule/Test/Unit/Block/Adminhtml
 
   post_ci:
     - cp -R /app/testresults/* testresults/    #copy test result from host into build container
