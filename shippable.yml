@@ -15,7 +15,7 @@ build:
     - sleep 10
     - docker exec fv_web_1 install-magento
     - docker exec fv_web_1 install-sampledata
-    - docker-compose down    
+    - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
 #    - /var/www/html/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml -c dev/tests/functional/phpunit.xml.dist
 
 notifications:
