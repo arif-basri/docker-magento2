@@ -21,7 +21,7 @@ build:
     - mkdir -p shippable/codecoverage
     - mkdir -p shippable/testresults     
     - docker exec docker-magento2_web_1 /var/www/html/vendor/bin/phpunit --log-junit /testresults/junit.xml -c dev/tests/unit/phpunit.xml.dist
-    - cp -R /codecoverage shippable/codecoverage
-    - cp -R /testresults shippable/testresults
+    - cp -R /codecoverage/. shippable/codecoverage
+    - cp -R /testresults/. shippable/testresults
     - docker-compose down
 
