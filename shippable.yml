@@ -23,7 +23,7 @@ build:
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
   
   on_failure:
-    - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/testresults/    #copy test result from host into build container
+    - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/shippable/testresults/    #copy test result from host into build container
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
 
 notifications:
