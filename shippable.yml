@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.1
+
+build:  
+  pre-ci:
+    
+  pre_ci_boot:
+
+  ci:
+    - docker-compose -f shippable/docker-compose.yml
+#    - /var/www/html/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml -c dev/tests/functional/phpunit.xml.dist
+
+notifications:
+  email: false
