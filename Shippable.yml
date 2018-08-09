@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.1
+
+build:
+  pre_ci_boot:
+    options: "-v /app:/app"
+  ci:
+    - cp -R . /app
+    - pip install -U docker-compose
+    - docker-compose up -d
+    - sleep 10
+    - docker exec -it docker-magento2_web_1 install-magento
+    - docker exec -it docker-magento2_web_1 install-sampledata
+    - docker-compose down
