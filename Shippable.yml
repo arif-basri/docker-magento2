@@ -13,4 +13,14 @@ build:
     - sleep 10
     - docker exec docker-magento2_web_1 install-magento
     - docker exec docker-magento2_web_1 install-sampledata
-    - docker-compose down
+
+before_script:
+  - mkdir -p shippable/codecoverage
+  - mkdir -p shippable/testresults
+  
+script:
+ - docker exec magento2_web_1 /var/www/html/vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist
+ - docker-compose down
+ 
+notifications:
+  email: false
