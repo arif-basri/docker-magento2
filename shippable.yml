@@ -20,7 +20,10 @@ build:
   post_ci:
     - cp -R /app/testresults/* testresults/    #copy test result from host into build container
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
-#    - /var/www/html/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml -c dev/tests/functional/phpunit.xml.dist
+  
+  on_failure:
+    - cp -R /app/testresults/* testresults/    #copy test result from host into build container
+    - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
 
 notifications:
   email: false
