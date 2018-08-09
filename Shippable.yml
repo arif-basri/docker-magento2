@@ -3,13 +3,9 @@ language: php
 php:
   - 7.1
 
-build:
-  pre_ci:
-    - mkdir -p /host/codecoverage
-    - mkdir -p /host/testresults    
-  
+build:  
   pre_ci_boot:
-    options: "-v /app:/app -v /host/codecoverage:/codecoverage -v /host/testresults:/testresults"
+    options: "-v /app:/app"
     
   ci:
     - cp -R . /app
@@ -20,8 +16,6 @@ build:
     - docker exec docker-magento2_web_1 install-sampledata
     - mkdir -p shippable/codecoverage
     - mkdir -p shippable/testresults     
-    - docker exec docker-magento2_web_1 /var/www/html/vendor/bin/phpunit --log-junit /testresults/junit.xml -c dev/tests/unit/phpunit.xml.dist
-    - cp -R /codecoverage/. shippable/codecoverage/
-    - cp -R /testresults/. shippable/testresults/
+    - docker exec docker-magento2_web_1 /var/www/html/vendor/bin/phpunit --log-junit $SHIPPABLE_REPO_DIR/shippable/testresults/junit.xml -c dev/tests/unit/phpunit.xml.dist
     - docker-compose down
 
