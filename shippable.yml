@@ -15,6 +15,7 @@ build:
     - sleep 10
     - docker exec fv_web_1 install-magento
     - docker exec fv_web_1 install-sampledata
+    - docker exec fv_web_1 mkdir -p /app/testresults
     - docker exec fv_web_1 /var/www/html/vendor/bin/phpunit --log-junit /app/testresults/junit.xml -c /var/www/html/dev/tests/unit/phpunit.xml.dist
 
   post_ci:
@@ -22,7 +23,7 @@ build:
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
   
   on_failure:
-    - cp -R /app/testresults/* testresults/    #copy test result from host into build container
+    - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/testresults/    #copy test result from host into build container
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
 
 notifications:
