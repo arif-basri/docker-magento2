@@ -5,7 +5,7 @@ php:
 
 build:
   pre_ci_boot:
-    options: "-v /app:/app,shippable/codecoverage:shippable/codecoverage,shippable/testresults:shippable/testresults"
+    options: "-v shippable/testresults:shippable/testresults"
   ci:
     - cp -R . /app
     - pip install -U docker-compose
