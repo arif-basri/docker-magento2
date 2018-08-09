@@ -9,7 +9,7 @@ build:
   pre_ci_boot:
 
   ci:
-    - docker-compose -f shippable/docker-compose.yml
+    - docker-compose -f shippable/docker-compose.yml up
 #    - /var/www/html/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml -c dev/tests/functional/phpunit.xml.dist
 
 notifications:
