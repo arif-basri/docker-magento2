@@ -9,7 +9,7 @@ build:
     - mkdir -p /shippable/testresults    
   
   pre_ci_boot:
-    options: "-v /app:/app -v /shippable/codecoverage:shippable/codecoverage -v /shippable/testresults:shippable/testresults"
+    options: "-v /app:/app -v /shippable/codecoverage:/shippable/codecoverage -v /shippable/testresults:/shippable/testresults"
     
   ci:
     - cp -R . /app
@@ -18,6 +18,8 @@ build:
     - sleep 10
     - docker exec docker-magento2_web_1 install-magento
     - docker exec docker-magento2_web_1 install-sampledata
+    - mkdir -p /shippable/codecoverage
+    - mkdir -p /shippable/testresults     
     - docker exec docker-magento2_web_1 /var/www/html/vendor/bin/phpunit --log-junit shippable/testresults/junit.xml -c dev/tests/unit/phpunit.xml.dist
     - docker-compose down
 
