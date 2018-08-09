@@ -19,7 +19,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - "8500:80
+      - "8500:80"
     links:
       - db     
 volumes:
