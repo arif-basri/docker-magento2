@@ -19,7 +19,7 @@ build:
     - docker exec fv_web_1 php -f /var/www/html/vendor/bin/phpunit -- --log-junit /app/testresults/junit.xml -c /var/www/html/dev/tests/unit/phpunit.xml.dist --filter ToolbarEntryTest
 
   post_ci:
-    - cp -R /app/testresults/* testresults/    #copy test result from host into build container
+    - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/shippable/testresults/    #copy test result from host into build container
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
   
   on_failure:
