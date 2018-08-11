@@ -31,6 +31,7 @@ build:
   post_ci:
     - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/shippable/testresults/    #copy test result from host into build container
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
+    - docker tag drydock $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER
     - docker push $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER 
   
   on_failure:
