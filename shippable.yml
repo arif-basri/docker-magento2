@@ -3,6 +3,16 @@ language: php
 php:
   - 7.1
 
+env:
+  global:
+    - TEST_RESULTS_DIR=$SHIPPABLE_REPO_DIR/shippable/testresults
+    - CODE_COVERAGE_DIR=$SHIPPABLE_REPO_DIR/shippable/codecoverage
+    - TESTS_LOC_DIR=$SHIPPABLE_REPO_DIR/tests
+    - MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin/
+    - REGISTRY_URL=registry.hub.docker.com
+    - IMAGE_REPO=magento3
+    - PROJECT_NAME=firadaboss
+    
 build:  
   pre-ci:
     
@@ -21,6 +31,7 @@ build:
   post_ci:
     - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/shippable/testresults/    #copy test result from host into build container
     - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
+    - docker push $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER 
   
   on_failure:
     - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/shippable/testresults/    #copy test result from host into build container
