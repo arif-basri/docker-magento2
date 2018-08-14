@@ -10,6 +10,8 @@ env:
     - PROJECT_NAME=firadaboss
     
 build:  
+  cache: true
+  
   pre-ci:
     
   pre_ci_boot:
