@@ -23,7 +23,7 @@ build:
     - docker build -t fv_web shippable -f shippable/developer/Dockerfile
     - docker run -d --name fv_web_1 --rm -v /app:/var/www/html fv_web
     - sleep 10
-    - docker exec fv_web_1 sh -c 'ls'
+    - docker exec fv_web_1 sh -c 'pwd && cd /var/www/html && ls'
     - docker exec fv_web_1 sh -c 'cp /var/www/html/install.sh /usr/local/bin/setup-env && chmod +x /usr/local/bin/setup-env'
     - docker exec fv_web_1 setup-env
     - docker exec fv_web_1 install-magento
