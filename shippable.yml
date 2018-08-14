@@ -24,6 +24,7 @@ build:
     - docker run -d --name fv_web_1 --rm -v /app:/var/www/html fv_web
     - sleep 10
     - docker exec fv_web_1 sh -c 'ls'
+    - docker exec fv_web_1 sh -c 'chmod +x /var/www/html/install.sh'
     - docker exec fv_web_1 install.sh
     - docker exec fv_web_1 install-magento
     - docker exec fv_web_1 mkdir -p /app/testresults
