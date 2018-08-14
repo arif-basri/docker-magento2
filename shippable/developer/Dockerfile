@@ -1,4 +1,4 @@
-FROM firadaboss/magento2_base
+FROM firadaboss/magento2_base:1
 # FROM alexcheng/apache2-php7:7.1.11
 # 
 # LABEL maintainer="alexcheng1982@gmail.com"
