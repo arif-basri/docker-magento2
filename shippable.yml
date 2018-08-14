@@ -30,12 +30,12 @@ build:
 
   post_ci:
     - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/shippable/testresults/    #copy test result from host into build container
-    - docker-compose -p fv -f shippable/docker-compose-shippable.yml down
     # - docker tag drydock/u16phpall:v6.7.4 $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER
     # - docker commit $SHIPPABLE_CONTAINER_NAME $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER
     - docker commit fv_web_1 $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER
     # - docker build -t $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER shippable/developer        
     - docker push $REGISTRY_URL/$PROJECT_NAME/$IMAGE_REPO:$BRANCH.$BUILD_NUMBER 
+    - docker-compose -p fv -f shippable/docker-compose-shippable.yml down    
   
   on_failure:
     - cp -R /app/testresults/* $SHIPPABLE_BUILD_DIR/shippable/testresults/    #copy test result from host into build container
